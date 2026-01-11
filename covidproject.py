@@ -1,21 +1,16 @@
-# COVID Data Analysis Project
-# Libraries used: Pandas, Matplotlib
-
 import pandas as pd
 import matplotlib.pyplot as plt
 import os
 
 def load_data():
-    """
-    Creates and returns a DataFrame with dummy COVID-19 data
-    for 5 Indian states.
-    """
-    data = {
-        "State": ["Maharashtra", "Kerala", "Karnataka", "Tamil Nadu", "Uttar Pradesh"],
-        "Confirmed": [8000000, 6800000, 4100000, 3600000, 2100000],
-        "Recovered": [7800000, 6600000, 3950000, 3500000, 2050000],
-        "Deaths": [148000, 72000, 40500, 38000, 23500]
-    }
+   
+   data = {
+    "State": ["Maharashtra", "Kerala", "Karnataka", "Tamil Nadu", "Uttar Pradesh"],
+    "Confirmed": [8200000, 7000000, 4350000, 3800000, 2500000],
+    "Recovered": [8000000, 6850000, 4200000, 3700000, 2400000],
+    "Deaths": [150500, 75000, 42000, 39500, 26000]
+}
+
 
     df = pd.DataFrame(data)
     return df
@@ -66,3 +61,4 @@ def main():
     print(df)
 if __name__ == "__main__":
     main()
+
