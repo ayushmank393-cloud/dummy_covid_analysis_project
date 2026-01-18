@@ -23,8 +23,7 @@ def load_data():
         "Deaths": [150500, 98000, 65000, 72000, 48000, 42000, 35000]
     }
 
-    df = pd.DataFrame(data)
-    return df
+    return pd.DataFrame(data)
 
 
 def calculate_rates(df):
@@ -38,7 +37,7 @@ def calculate_rates(df):
 
 def generate_bar_chart(df):
     """
-    Generates a bar chart for Recovery and Fatality Rates
+    Generates a bar chart with value labels
     """
     os.makedirs("output", exist_ok=True)
 
@@ -46,8 +45,8 @@ def generate_bar_chart(df):
 
     x = range(len(df["State"]))
 
-    # 🟢 Recovery Rate (GREEN)
-    plt.bar(
+    # Bars
+    recovery_bars = plt.bar(
         x,
         df["Recovery Rate (%)"],
         width=0.4,
@@ -55,14 +54,34 @@ def generate_bar_chart(df):
         color="green"
     )
 
-    # 🔴 Fatality Rate (RED)
-    plt.bar(
+    fatality_bars = plt.bar(
         [i + 0.4 for i in x],
         df["Fatality Rate (%)"],
         width=0.4,
         label="Fatality Rate (%)",
         color="red"
     )
+
+    # Add value labels on bars
+    for bar in recovery_bars:
+        height = bar.get_height()
+        plt.text(
+            bar.get_x() + bar.get_width() / 2,
+            height + 0.3,
+            f"{height:.1f}%",
+            ha="center",
+            fontsize=9
+        )
+
+    for bar in fatality_bars:
+        height = bar.get_height()
+        plt.text(
+            bar.get_x() + bar.get_width() / 2,
+            height + 0.1,
+            f"{height:.2f}%",
+            ha="center",
+            fontsize=9
+        )
 
     # Chart styling
     plt.title("COVID-19 Recovery vs Fatality Rates (India)", fontsize=14)
