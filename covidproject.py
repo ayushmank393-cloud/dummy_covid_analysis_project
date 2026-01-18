@@ -18,9 +18,9 @@ def load_data():
             "Delhi",
             "West Bengal"
         ],
-        "Confirmed": [8200000,7000000,5200000,4600000,3500000,2000000,1800000],
-        "Recovered": [7800000,6500000,4900000,4200000,3100000,1750000,1600000],
-        "Deaths": [150500,98000,65000,72000,48000,42000,35000]
+        "Confirmed": [8200000, 7000000, 5200000, 4600000, 3500000, 2000000, 1800000],
+        "Recovered": [7800000, 6500000, 4900000, 4200000, 3100000, 1750000, 1600000],
+        "Deaths": [150500, 98000, 65000, 72000, 48000, 42000, 35000]
     }
 
     df = pd.DataFrame(data)
@@ -38,20 +38,33 @@ def calculate_rates(df):
 
 def generate_bar_chart(df):
     """
-    Generates a clear bar chart for Recovery and Fatality Rates
+    Generates a bar chart for Recovery and Fatality Rates
     """
     os.makedirs("output", exist_ok=True)
 
     plt.figure(figsize=(11, 6))
 
-  
     x = range(len(df["State"]))
-    plt.bar(x, df["Recovery Rate (%)"], width=0.4,
-            label="Recovery Rate (%)", color="seagreen")
-    plt.bar([i + 0.4 for i in x], df["Fatality Rate (%)"], width=0.4,
-            label="Fatality Rate (%)", color="crimson")
 
-   
+    # 🟢 Recovery Rate (GREEN)
+    plt.bar(
+        x,
+        df["Recovery Rate (%)"],
+        width=0.4,
+        label="Recovery Rate (%)",
+        color="green"
+    )
+
+    # 🔴 Fatality Rate (RED)
+    plt.bar(
+        [i + 0.4 for i in x],
+        df["Fatality Rate (%)"],
+        width=0.4,
+        label="Fatality Rate (%)",
+        color="red"
+    )
+
+    # Chart styling
     plt.title("COVID-19 Recovery vs Fatality Rates (India)", fontsize=14)
     plt.xlabel("State")
     plt.ylabel("Rate (%)")
@@ -75,4 +88,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
